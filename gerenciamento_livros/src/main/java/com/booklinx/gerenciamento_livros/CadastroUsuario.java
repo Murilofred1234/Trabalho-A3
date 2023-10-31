@@ -2,7 +2,7 @@ package com.booklinx.gerenciamento_livros;
 
 import javax.swing.JOptionPane;
 
-class Principal {
+class CadastroUsuario {
     public static void main(String[] args) throws Exception{
         // 1 - cadastrar um usuario
         // 0 - sair

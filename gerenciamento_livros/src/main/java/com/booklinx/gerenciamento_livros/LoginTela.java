@@ -54,6 +54,11 @@ public class LoginTela extends javax.swing.JFrame {
         jLabel3.setText("Biblioteca Booklinx");
 
         cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,10 +108,18 @@ public class LoginTela extends javax.swing.JFrame {
         
         if (usuario.equals("adm") && senha.equals("123")) {
             JOptionPane.showMessageDialog(null, "Bem vindo!");
+            DashboardTela dt = new DashboardTela();
+            dt.setVisible(true);
+            this.dispose();
+
         } else {
             JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
         }
     }//GEN-LAST:event_entrarButtonActionPerformed
+
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     /**
      * @param args the command line arguments
