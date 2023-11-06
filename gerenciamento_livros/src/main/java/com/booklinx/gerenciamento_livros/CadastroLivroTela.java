@@ -50,13 +50,13 @@ public class CadastroLivroTela extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("titulo:");
+        jLabel1.setText("Título:");
 
-        jLabel2.setText("autor:");
+        jLabel2.setText("Autor:");
 
-        jLabel3.setText("genero:");
+        jLabel3.setText("Gênero:");
 
-        jLabel4.setText("nota:");
+        jLabel4.setText("Nota:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,7 +76,7 @@ public class CadastroLivroTela extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tituloTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(tituloTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                             .addComponent(generoTextField)
                             .addComponent(notaTextField)
                             .addComponent(autorTextField))))
@@ -124,7 +124,7 @@ public class CadastroLivroTela extends javax.swing.JFrame {
             Logger.getLogger(CadastroLivroTela.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DashboardTela tc = new DashboardTela();
+        DashboardTelaAdm tc = new DashboardTelaAdm();
         tc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cadastrarButtonActionPerformed

@@ -39,7 +39,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tituloTextField" pref="197" max="32767" attributes="0"/>
+                          <Component id="tituloTextField" pref="196" max="32767" attributes="0"/>
                           <Component id="generoTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="notaTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="autorTextField" alignment="0" max="32767" attributes="0"/>
@@ -99,22 +99,22 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="titulo:"/>
+        <Property name="text" type="java.lang.String" value="T&#xed;tulo:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="autor:"/>
+        <Property name="text" type="java.lang.String" value="Autor:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="genero:"/>
+        <Property name="text" type="java.lang.String" value="G&#xea;nero:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="nota:"/>
+        <Property name="text" type="java.lang.String" value="Nota:"/>
       </Properties>
     </Component>
   </SubComponents>

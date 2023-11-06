@@ -47,7 +47,7 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
 
         jLabel3.setText("Sexo:");
 
-        cadastrarButton.setText("Add");
+        cadastrarButton.setText("Cadastrar");
         cadastrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarButtonActionPerformed(evt);
@@ -80,14 +80,14 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idadeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sexoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(sexoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cadastrarButton)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -110,7 +110,7 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
             Logger.getLogger(CadastroUsuarioTela.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DashboardTela tc = new DashboardTela();
+        DashboardTelaAdm tc = new DashboardTelaAdm();
         tc.setVisible(true);
         this.dispose();       
     }//GEN-LAST:event_cadastrarButtonActionPerformed
