@@ -4,6 +4,7 @@
  */
 package com.booklinx.gerenciamento_livros;
 
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,13 +14,18 @@ import java.util.logging.Logger;
  */
 public class CadastroLivroTela extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroLivroTela
-     */
+    private Properties properties;
+    
     public CadastroLivroTela() {
         super ("Cadastro de livros");
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    CadastroLivroTela(Properties p) {
+        this();
+        this.properties = p;
+        System.out.println(properties);
     }
 
     /**
@@ -117,14 +123,14 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         double nota = Double.parseDouble(notaString);
         
         var livro = new Livro(titulo, autor, genero, nota);                
-        var livroDAO = new LivroDAO();
+        var livroDAO = new LivroDAO(properties);
         try {
             livroDAO.cadastrar(livro);
         } catch (Exception ex) {
             Logger.getLogger(CadastroLivroTela.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DashboardTelaAdm tc = new DashboardTelaAdm();
+        DashboardTela tc = new DashboardTela(properties);
         tc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cadastrarButtonActionPerformed

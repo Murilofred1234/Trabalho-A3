@@ -1,18 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.booklinx.gerenciamento_livros;
 
 import java.sql.PreparedStatement;
+import java.util.Properties;
 
 public class LivroDAO {
+    private Properties properties;
+    
+    public LivroDAO(Properties p){
+        this.properties = p;
+        System.out.println(properties);
+    }
+    
     public void cadastrar(Livro l) throws Exception{
         // 1. especificar o comando SQL
         String sql = "INSERT INTO livros(titulo, autor, genero, nota) VALUES(?, ?, ?, ?)";
         
         // 2. abrir conexao com o MySQL
-        var fabricaDeConexoes = new ConnectionFactory();
+        var fabricaDeConexoes = new ConnectionFactory(properties);
         var conexao = fabricaDeConexoes.conectar();
         
         // 3. preparar o comando

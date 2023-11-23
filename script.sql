@@ -1,11 +1,13 @@
-create database db_booklinx;
-use db_booklinx;
+create database defaultdb;
+use defaultdb;
 
 create table usuarios(
     id_usuario int not null primary key auto_increment,
     nome varchar(100) not null,
     idade int not null,
-    sexo varchar(100) not null
+    sexo varchar(100) not null,
+    login varchar(100) null,
+    senha varchar(100) null
 );
 
 create table livros(

@@ -2,12 +2,27 @@ package com.booklinx.gerenciamento_livros;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
+
 public class ConnectionFactory {
-    private final String host = "mysql-30400d26-murilofcorso-c0a6.aivencloud.com";
-    private final String port = "27270";
-    private final String user = "avnadmin";
-    private final String password = "AVNS_ZY4dNyp8wlS11-4oxKt";
-    private final String db = "defaultdb";
+    private final Properties properties;
+    
+    private String host;
+    private String port;
+    private String user;
+    private String password;
+    private String db;
+    
+    
+    public ConnectionFactory(Properties p) {
+        this.properties = p;
+        
+        host = properties.getProperty("DB_HOST");
+        port = properties.getProperty("DB_PORT");
+        user = properties.getProperty("DB_USER");
+        password = properties.getProperty("DB_PASSWORD");
+        db = properties.getProperty("DB_NAME");
+    }
     
     public Connection conectar() throws Exception {
         //String de conexão
