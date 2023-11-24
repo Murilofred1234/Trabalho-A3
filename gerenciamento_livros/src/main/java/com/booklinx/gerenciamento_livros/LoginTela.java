@@ -5,6 +5,8 @@
 package com.booklinx.gerenciamento_livros;
 
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,17 +112,24 @@ public class LoginTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
-        String usuario = usuarioTextField.getText();
+        String login = usuarioTextField.getText();
         String senha = new String (senhaPasswordField.getPassword());
-               
-        if (usuario.equals("adm") && senha.equals("123")) {
-            DashboardTela dta = new DashboardTela(properties);
-            dta.setVisible(true);
-            this.dispose();
-
-        } 
-        else {
-            JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
+        
+        Usuario usuario = new Usuario(login, senha);
+        UsuarioDAO dao = new UsuarioDAO(properties);
+        
+        try {
+            if(dao.existe(usuario) != null){
+                DashboardTela dt = new DashboardTela(properties);
+                dt.setVisible(true);
+                this.dispose();
+            }
+            else{
+                System.out.println(dao.existe(usuario));
+                JOptionPane.showMessageDialog(null, "UsuOptionPane.showMessagário e/ou senha inválido(s)");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginTela.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_entrarButtonActionPerformed
 
