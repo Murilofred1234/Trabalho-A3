@@ -1,6 +1,8 @@
 package com.booklinx.gerenciamento_livros;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 public class LivroDAO {
@@ -33,5 +35,49 @@ public class LivroDAO {
         
         // 6. fechar a conexao
         conexao.close();
+    }
+    
+    public Livro existe(Livro l) throws Exception{
+        ConnectionFactory fabrica = new ConnectionFactory(properties);
+        String sql = "SELECT * FROM livros WHERE titulo = ?";
+        
+        try(Connection conexao = fabrica.conectar()){          
+            try(PreparedStatement ps = conexao.prepareStatement(sql)){
+                ps.setString(1, l.getTitulo());
+
+                try(ResultSet rs = ps.executeQuery()){
+                    if (rs.next()) {
+                        return l;
+                    } else {
+                        return null;
+                    }
+                }
+            }            
+        }
+    }
+    
+    public Livro buscar(Livro l) throws Exception {
+        ConnectionFactory fabrica = new ConnectionFactory(properties);
+        String sql = "SELECT * FROM livros WHERE titulo = ?";
+        
+        try(Connection conexao = fabrica.conectar()){          
+            try(PreparedStatement ps = conexao.prepareStatement(sql)){
+                ps.setString(1, l.getTitulo());
+
+                try(ResultSet rs = ps.executeQuery()){
+                    if (rs.next()) {
+                        int id = rs.getInt("id_livro");
+                        String titulo = rs.getString("titulo");
+                        String autor = rs.getString("autor");
+                        String genero = rs.getString("genero");
+                        double nota = rs.getDouble("nota");
+                        Livro livro = new Livro(id, titulo, autor, genero, nota);
+                        return livro;
+                    } else {
+                        return null;
+                    }
+                }
+            }            
+        }
     }
 }

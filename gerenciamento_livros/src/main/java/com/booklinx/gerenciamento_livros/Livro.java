@@ -16,11 +16,23 @@ public class Livro {
     private String genero;
     private double nota;
 
+    public Livro(int id, String titulo, String autor, String genero, double nota) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.genero = genero;
+        this.nota = nota;
+    }
+    
     public Livro(String titulo, String autor, String genero, double nota) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
         this.nota = nota;
+    }
+    
+    public Livro(String titulo) {
+        this.titulo = titulo;
     }
     
     public int getId() {
