@@ -19,4 +19,11 @@ create table livros(
     nota double null
 );
 
+create table notas(
+	id_avaliacao int not null primary key auto_increment,
+	id_livro int not null,
+    id_usuario int not null,
+    nota double not null
+);
+
 

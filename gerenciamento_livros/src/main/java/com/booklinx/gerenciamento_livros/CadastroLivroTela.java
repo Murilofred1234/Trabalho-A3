@@ -132,10 +132,22 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         String genero = generoTextField.getText();
         double nota = Double.parseDouble(notaTextField.getText());
         
-        var livro = new Livro(titulo, autor, genero, nota);                
-        var livroDAO = new LivroDAO(properties);
+        var livro = new Livro(titulo, autor, genero, nota);            
+        var livroDAO = new LivroDAO(properties);            
+        NotaDAO notaDAO = new NotaDAO(properties);
         try {
-            livroDAO.cadastrar(livro);
+            if(livroDAO.existe(livro) != null) {
+                livro = livroDAO.buscar(livro);
+                Nota n = new Nota(livro.getId(), usuario.getId(), nota);
+                notaDAO.cadastrar(n);
+            }
+            else{
+                livroDAO.cadastrar(livro);
+                livro = livroDAO.buscar(livro);
+                Nota n = new Nota(livro.getId(), usuario.getId(), nota);
+                notaDAO.cadastrar(n);
+
+            }
         } catch (Exception ex) {
             Logger.getLogger(CadastroLivroTela.class.getName()).log(Level.SEVERE, null, ex);
         }

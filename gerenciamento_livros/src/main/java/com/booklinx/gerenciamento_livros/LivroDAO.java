@@ -14,27 +14,19 @@ public class LivroDAO {
     }
     
     public void cadastrar(Livro l) throws Exception{
-        // 1. especificar o comando SQL
         String sql = "INSERT INTO livros(titulo, autor, genero, nota) VALUES(?, ?, ?, ?)";
         
-        // 2. abrir conexao com o MySQL
         var fabricaDeConexoes = new ConnectionFactory(properties);
-        var conexao = fabricaDeConexoes.conectar();
-        
-        // 3. preparar o comando
-        PreparedStatement ps = conexao.prepareStatement(sql);
-        
-        // 4. substituir os eventuais placeholders
-        ps.setString(1, l.getTitulo());
-        ps.setString(2, l.getAutor());
-        ps.setString(3, l.getGenero());
-        ps.setDouble(4, l.getNota());
-        
-        // 5. executar o comando preparado
-        ps.execute();
-        
-        // 6. fechar a conexao
-        conexao.close();
+        try (java.sql.Connection conexao = fabricaDeConexoes.conectar()) {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            
+            ps.setString(1, l.getTitulo());
+            ps.setString(2, l.getAutor());
+            ps.setString(3, l.getGenero());
+            ps.setDouble(4, l.getNota());
+            
+            ps.execute();
+        }
     }
     
     public Livro existe(Livro l) throws Exception{
