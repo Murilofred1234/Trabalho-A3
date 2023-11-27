@@ -6,8 +6,9 @@ create table usuarios(
     nome varchar(100) not null,
     idade int not null,
     sexo varchar(100) not null,
-    login varchar(100) null,
-    senha varchar(100) null
+    login varchar(100) not null unique,
+    senha varchar(100) not null,
+    adm int not null
 );
 
 create table livros(
@@ -18,9 +19,4 @@ create table livros(
     nota double null
 );
 
-create table generos_preferidos(
-	id int not null primary key auto_increment,
-    id_usuario int not null,
-    genero_preferido varchar(100) not null
-);
 

@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class LivrosTela extends javax.swing.JFrame {
 
     private Properties properties;
+    private Usuario usuario;
     
     public LivrosTela() {
         super ("Livros");
@@ -26,9 +27,10 @@ public class LivrosTela extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    LivrosTela(Properties p) {
+    LivrosTela(Properties p, Usuario u) {
         this();
         this.properties = p;
+        this.usuario = u;
         System.out.println(properties);
     }
 
@@ -157,9 +159,16 @@ public class LivrosTela extends javax.swing.JFrame {
     }//GEN-LAST:event_exibirTodosButtonActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
-        DashboardTela dt = new DashboardTela(properties);
-        dt.setVisible(true);
-        this.dispose();
+        if (usuario.getAdm() == 1) {
+            DashboardTelaAdm dt = new DashboardTelaAdm(properties, usuario);
+            dt.setVisible(true);
+            this.dispose();
+        }
+        else {
+            DashboardTelaUsuario dt = new DashboardTelaUsuario(properties, usuario);
+            dt.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_voltarButtonActionPerformed
 
     private void buscarLivroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarLivroButtonActionPerformed

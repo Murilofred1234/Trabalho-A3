@@ -7,17 +7,23 @@ public class Usuario {
     private String sexo;
     private String login;
     private String senha;
+    private int adm;
     
-    public Usuario(String nome, int idade, String sexo) {
+    public Usuario(int id, String nome, int idade, String sexo, String login, String senha, int adm) {
+        this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.sexo = sexo;
+        this.login = login;
+        this.senha = senha;
+        this.adm = adm;
     }
     
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }
+    public Usuario() {}
     
     public int getId() {
         return id;
@@ -31,7 +37,7 @@ public class Usuario {
         this.nome = nome;
     }
     
-public int getIdade() {
+    public int getIdade() {
         return idade;
     }
     
@@ -61,5 +67,13 @@ public int getIdade() {
     
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getAdm() {
+        return adm;
+    }
+    
+    public void setAdm(int adm) {
+        this.adm = adm;
     }
 }

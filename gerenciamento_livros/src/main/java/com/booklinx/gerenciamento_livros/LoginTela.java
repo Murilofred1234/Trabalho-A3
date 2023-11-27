@@ -24,7 +24,7 @@ public class LoginTela extends javax.swing.JFrame {
 
     LoginTela(Properties p) {
         this();
-        this.properties = p;
+        this.properties = p;;
         System.out.println(properties);
     }
 
@@ -120,13 +120,21 @@ public class LoginTela extends javax.swing.JFrame {
         
         try {
             if(dao.existe(usuario) != null){
-                DashboardTela dt = new DashboardTela(properties);
-                dt.setVisible(true);
-                this.dispose();
+                usuario = dao.buscar(usuario);
+                if (usuario.getAdm() == 1) {
+                    DashboardTelaAdm dt = new DashboardTelaAdm(properties, usuario);
+                    dt.setVisible(true);
+                    this.dispose();
+                }
+                else {
+                    DashboardTelaUsuario dt = new DashboardTelaUsuario(properties, usuario);
+                    dt.setVisible(true);
+                    this.dispose();
+                }
             }
             else{
                 System.out.println(dao.existe(usuario));
-                JOptionPane.showMessageDialog(null, "UsuOptionPane.showMessagário e/ou senha inválido(s)");
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
             }
         } catch (Exception ex) {
             Logger.getLogger(LoginTela.class.getName()).log(Level.SEVERE, null, ex);

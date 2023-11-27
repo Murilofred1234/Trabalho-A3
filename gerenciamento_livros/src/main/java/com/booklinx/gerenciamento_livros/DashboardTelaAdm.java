@@ -10,22 +10,24 @@ import java.util.Properties;
  *
  * @author muril
  */
-public class DashboardTela extends javax.swing.JFrame {
+public class DashboardTelaAdm extends javax.swing.JFrame {
 
     private Properties properties;
+    private Usuario usuario;
 
     /**
      * Creates new form DashboardTela
      */
-    public DashboardTela() {
+    public DashboardTelaAdm() {
         super ("Cadastro de cursos e alunos");
         initComponents();
         setLocationRelativeTo(null);
     }
 
-    DashboardTela(Properties p) {
+    DashboardTelaAdm(Properties p, Usuario u) {
         this();
         this.properties = p;
+        this.usuario = u;
         System.out.println(properties);
     }
 
@@ -93,19 +95,19 @@ public class DashboardTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CadastroUsuarioTela tc = new CadastroUsuarioTela(properties);
+        CadastroUsuarioTela tc = new CadastroUsuarioTela(properties, usuario);
         tc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        CadastroLivroTela tc = new CadastroLivroTela(properties);
+        CadastroLivroTela tc = new CadastroLivroTela(properties, usuario);
         tc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        LivrosTela lt = new LivrosTela(properties);
+        LivrosTela lt = new LivrosTela(properties, usuario);
         lt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -127,14 +129,18 @@ public class DashboardTela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTelaAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTelaAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTelaAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTelaAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -143,7 +149,7 @@ public class DashboardTela extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardTela().setVisible(true);
+                new DashboardTelaAdm().setVisible(true);
             }
         });
     }

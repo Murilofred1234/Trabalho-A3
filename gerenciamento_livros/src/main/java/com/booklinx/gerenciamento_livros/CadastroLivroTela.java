@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 public class CadastroLivroTela extends javax.swing.JFrame {
 
     private Properties properties;
+    private Usuario usuario;
     
     public CadastroLivroTela() {
         super ("Cadastro de livros");
@@ -22,9 +23,10 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    CadastroLivroTela(Properties p) {
+    CadastroLivroTela(Properties p, Usuario u) {
         this();
         this.properties = p;
+        this.usuario = u;
         System.out.println(properties);
     }
 
@@ -128,8 +130,7 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
         String genero = generoTextField.getText();
-        String notaString = notaTextField.getText();
-        double nota = Double.parseDouble(notaString);
+        double nota = Double.parseDouble(notaTextField.getText());
         
         var livro = new Livro(titulo, autor, genero, nota);                
         var livroDAO = new LivroDAO(properties);
@@ -139,15 +140,23 @@ public class CadastroLivroTela extends javax.swing.JFrame {
             Logger.getLogger(CadastroLivroTela.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DashboardTela tc = new DashboardTela(properties);
-        tc.setVisible(true);
-        this.dispose();
+        tituloTextField.setText("");
+        autorTextField.setText("");
+        generoTextField.setText("");
+        notaTextField.setText("");
     }//GEN-LAST:event_cadastrarButtonActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
-        DashboardTela dt = new DashboardTela(properties);
-        dt.setVisible(true);
-        this.dispose();
+        if (usuario.getAdm() == 1) {
+            DashboardTelaAdm dt = new DashboardTelaAdm(properties, usuario);
+            dt.setVisible(true);
+            this.dispose();
+        }
+        else {
+            DashboardTelaUsuario dt = new DashboardTelaUsuario(properties, usuario);
+            dt.setVisible(true);
+            this.dispose();
+        } 
     }//GEN-LAST:event_voltarButtonActionPerformed
 
     /**

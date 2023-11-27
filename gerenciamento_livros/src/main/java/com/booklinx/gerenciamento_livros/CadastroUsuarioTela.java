@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 public class CadastroUsuarioTela extends javax.swing.JFrame {
 
     private Properties properties;
+    private Usuario usuario;
 
     /**
      * Creates new form TelaCadastro
@@ -25,9 +26,10 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    CadastroUsuarioTela(Properties p) {
+    CadastroUsuarioTela(Properties p, Usuario u) {
         this();
         this.properties = p;
+        this.usuario = u;
         System.out.println(properties);
     }
 
@@ -48,6 +50,12 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cadastrarButton = new javax.swing.JButton();
         voltarButton = new javax.swing.JButton();
+        loginTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        senhaTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        admTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +79,12 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Login:");
+
+        jLabel5.setText("Senha:");
+
+        jLabel6.setText("Adm:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,16 +94,23 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(idadeTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sexoTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cadastrarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(voltarButton))
-                    .addComponent(nomeTextField))
+                    .addComponent(nomeTextField)
+                    .addComponent(loginTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(senhaTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(admTextField, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -104,13 +125,25 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
                     .addComponent(idadeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(sexoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadastrarButton)
-                    .addComponent(voltarButton))
+                    .addComponent(sexoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(senhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(admTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(voltarButton)
+                    .addComponent(cadastrarButton))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -119,25 +152,30 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
 
     private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
         String nome = nomeTextField.getText();
-        String idadeString = idadeTextField.getText();
-        int idade = Integer.parseInt(idadeString);
+        int idade = Integer.parseInt(idadeTextField.getText());
         String sexo = sexoTextField.getText();
+        String login = loginTextField.getText();
+        String senha = senhaTextField.getText();
+        int adm = Integer.parseInt(admTextField.getText());
         
-        var usuario = new Usuario(nome, idade, sexo);                
+        Usuario u = new Usuario(0, nome, idade, sexo, login, senha, adm);                
         var usuarioDAO = new UsuarioDAO(properties);
         try {
-            usuarioDAO.cadastrar(usuario);
+            usuarioDAO.cadastrar(u);
         } catch (Exception ex) {
             Logger.getLogger(CadastroUsuarioTela.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DashboardTela tc = new DashboardTela(properties);
-        tc.setVisible(true);
-        this.dispose();       
+        nomeTextField.setText("");
+        idadeTextField.setText("");
+        sexoTextField.setText("");
+        loginTextField.setText("");
+        senhaTextField.setText("");
+        admTextField.setText("");
     }//GEN-LAST:event_cadastrarButtonActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
-        DashboardTela dt = new DashboardTela(properties);
+        DashboardTelaAdm dt = new DashboardTelaAdm(properties, usuario);
         dt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltarButtonActionPerformed
@@ -181,12 +219,18 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField admTextField;
     private javax.swing.JButton cadastrarButton;
     private javax.swing.JTextField idadeTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField loginTextField;
     private javax.swing.JTextField nomeTextField;
+    private javax.swing.JTextField senhaTextField;
     private javax.swing.JTextField sexoTextField;
     private javax.swing.JButton voltarButton;
     // End of variables declaration//GEN-END:variables
