@@ -30,7 +30,6 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
         this();
         this.properties = p;
         this.usuario = u;
-        System.out.println(properties);
     }
 
     /**

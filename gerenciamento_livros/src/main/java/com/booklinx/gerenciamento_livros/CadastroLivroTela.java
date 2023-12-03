@@ -27,7 +27,6 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         this();
         this.properties = p;
         this.usuario = u;
-        System.out.println(properties);
     }
 
     /**
@@ -131,7 +130,7 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         String autor = autorTextField.getText();
         String genero = generoTextField.getText();
         double nota = Double.parseDouble(notaTextField.getText());
-        
+                
         var livro = new Livro(titulo, autor, genero, nota);            
         var livroDAO = new LivroDAO(properties);            
         NotaDAO notaDAO = new NotaDAO(properties);

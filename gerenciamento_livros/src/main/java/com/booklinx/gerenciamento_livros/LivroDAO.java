@@ -10,7 +10,6 @@ public class LivroDAO {
     
     public LivroDAO(Properties p){
         this.properties = p;
-        System.out.println(properties);
     }
     
     public void cadastrar(Livro l) throws Exception{

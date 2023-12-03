@@ -4,7 +4,9 @@
  */
 package com.booklinx.gerenciamento_livros;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -15,8 +17,7 @@ class NotaDAO {
     private Properties properties;
     
     public NotaDAO(Properties p){
-        this.properties = p;
-        System.out.println(properties);
+        this.properties = p;      
     }
     
     public void cadastrar(Nota n) throws Exception {
@@ -32,5 +33,27 @@ class NotaDAO {
             
             ps.execute();
         }
+    }
+    
+    public double media(int idLivro) throws Exception{
+        double quantidadeAvaliacoes = 0;
+        double totalNotas = 0;
+        double nota;
+        
+        String sql = "SELECT * FROM notas WHERE id_livro = ?";
+        
+        ConnectionFactory fabric = new ConnectionFactory(properties);
+        try (Connection conexao = fabric.conectar()) {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, idLivro);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                nota = rs.getDouble("nota");
+                totalNotas += nota;
+                quantidadeAvaliacoes += 1;
+            }
+            double media = totalNotas / quantidadeAvaliacoes;
+            return media;
+        }                        
     }
 }

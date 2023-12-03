@@ -27,8 +27,7 @@ public class DashboardTelaAdm extends javax.swing.JFrame {
     DashboardTelaAdm(Properties p, Usuario u) {
         this();
         this.properties = p;
-        this.usuario = u;
-        System.out.println(properties);
+        this.usuario = u;     
     }
 
     /**

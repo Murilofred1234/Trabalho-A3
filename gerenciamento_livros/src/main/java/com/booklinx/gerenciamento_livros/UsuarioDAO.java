@@ -9,8 +9,7 @@ public class UsuarioDAO {
     private Properties properties;
     
     public UsuarioDAO(Properties p){
-        this.properties = p;
-        System.out.println(properties);
+        this.properties = p;       
     }
     
     public void cadastrar(Usuario u) throws Exception{

@@ -24,8 +24,7 @@ public class LoginTela extends javax.swing.JFrame {
 
     LoginTela(Properties p) {
         this();
-        this.properties = p;;
-        System.out.println(properties);
+        this.properties = p;;       
     }
 
     /**
