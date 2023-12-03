@@ -56,4 +56,16 @@ class NotaDAO {
             return media;
         }                        
     }
+    
+    public void atualizar(int idLivro) throws Exception {
+        String sql = "UPDATE livros SET nota = ? WHERE id_livro = ?;";
+        
+        ConnectionFactory fabric = new ConnectionFactory(properties);
+        try (Connection conn = fabric.conectar()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, media(idLivro));
+            ps.setInt(2, idLivro);
+            ps.execute();
+        }
+    }
 }

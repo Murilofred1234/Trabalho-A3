@@ -139,6 +139,7 @@ public class CadastroLivroTela extends javax.swing.JFrame {
                 livro = livroDAO.buscar(livro);
                 Nota n = new Nota(livro.getId(), usuario.getId(), nota);
                 notaDAO.cadastrar(n);
+                notaDAO.atualizar(livro.getId());
             }
             else{
                 livroDAO.cadastrar(livro);

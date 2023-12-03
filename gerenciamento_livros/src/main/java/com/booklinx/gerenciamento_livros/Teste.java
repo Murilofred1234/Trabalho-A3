@@ -18,7 +18,7 @@ public class Teste {
         p.load(fr);
         
         NotaDAO dao = new NotaDAO(p);
-        double media = dao.media(31);
-        System.out.println(media);
+        double media = dao.media(1);
+        dao.atualizar(1);           
     }
 }
