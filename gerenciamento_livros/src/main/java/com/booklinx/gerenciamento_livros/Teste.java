@@ -19,6 +19,6 @@ public class Teste {
         
         NotaDAO dao = new NotaDAO(p);
         double media = dao.media(1);
-        dao.atualizar(1);           
+        dao.atualizar(1);
     }
 }
