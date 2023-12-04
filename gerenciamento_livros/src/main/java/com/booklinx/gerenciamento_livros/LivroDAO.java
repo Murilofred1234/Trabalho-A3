@@ -1,8 +1,11 @@
 package com.booklinx.gerenciamento_livros;
 
+import java.awt.List;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class LivroDAO {
@@ -70,5 +73,25 @@ public class LivroDAO {
                 }
             }            
         }
+    }
+    
+    public ArrayList<String> buscarGeneros() throws Exception {
+        String sql = "SELECT genero FROM livros";
+        ArrayList <String> generos = new ArrayList<>();
+        
+        ConnectionFactory fabric = new ConnectionFactory(properties);
+        try(Connection conn = fabric.conectar()) {
+            PreparedStatement ps = conn.prepareStatement(sql);           
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String genero = rs.getString("genero");
+                if (!generos.contains(genero)) {
+                   generos.add(genero);
+                }
+               
+            }
+            return generos;
+        }                    
     }
 }

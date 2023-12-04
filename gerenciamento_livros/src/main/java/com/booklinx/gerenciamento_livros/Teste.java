@@ -17,8 +17,9 @@ public class Teste {
         Properties p = new Properties();
         p.load(fr);
         
-        NotaDAO dao = new NotaDAO(p);
-        double media = dao.media(1);
-        dao.atualizar(1);
+        LivroDAO dao = new LivroDAO(p);
+        var generos = dao.buscarGeneros();
+        System.out.println(generos);
+        
     }
 }
