@@ -7,6 +7,7 @@ package com.booklinx.gerenciamento_livros;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,10 +137,7 @@ public class CadastroLivroTela extends javax.swing.JFrame {
         NotaDAO notaDAO = new NotaDAO(properties);
         try {
             if(livroDAO.existe(livro) != null) {
-                livro = livroDAO.buscar(livro);
-                Nota n = new Nota(livro.getId(), usuario.getId(), nota);
-                notaDAO.cadastrar(n);
-                notaDAO.atualizar(livro.getId());
+                JOptionPane.showMessageDialog(null, "Livro já cadastrado");
             }
             else{
                 livroDAO.cadastrar(livro);

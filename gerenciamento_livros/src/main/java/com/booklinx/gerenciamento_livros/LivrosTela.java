@@ -4,12 +4,14 @@
  */
 package com.booklinx.gerenciamento_livros;
 
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,7 +32,32 @@ public class LivrosTela extends javax.swing.JFrame {
     LivrosTela(Properties p, Usuario u) {
         this();
         this.properties = p;
-        this.usuario = u;   
+        this.usuario = u;
+        
+        try {
+            ConnectionFactory fabrica = new ConnectionFactory(properties);
+            Connection con = fabrica.conectar();
+            
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM livros ORDER BY nota DESC";
+            ResultSet rs = st.executeQuery(sql);
+            
+            DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+            tblModel.setRowCount(0);
+            
+            while (rs.next()) {
+                String id = String.valueOf(rs.getInt("id_livro"));
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String genero = rs.getString("genero");
+                String nota = String.valueOf(rs.getDouble("nota"));
+                
+                String tbData[] = {id, titulo, autor, genero, nota};                           
+                tblModel.addRow(tbData);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -42,21 +69,14 @@ public class LivrosTela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        exibirTodosButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         voltarButton = new javax.swing.JButton();
         buscarLivroButton = new javax.swing.JButton();
         livroTextField = new javax.swing.JTextField();
+        avaliarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        exibirTodosButton.setText("Mostrar livros");
-        exibirTodosButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exibirTodosButtonActionPerformed(evt);
-            }
-        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,6 +109,13 @@ public class LivrosTela extends javax.swing.JFrame {
             }
         });
 
+        avaliarButton.setText("Avaliar livro");
+        avaliarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                avaliarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,66 +123,37 @@ public class LivrosTela extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(avaliarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(exibirTodosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buscarLivroButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(livroTextField))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(livroTextField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buscarLivroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(exibirTodosButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscarLivroButton)
                     .addComponent(livroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(voltarButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(avaliarButton)
+                    .addComponent(voltarButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exibirTodosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exibirTodosButtonActionPerformed
-        try {
-            ConnectionFactory fabrica = new ConnectionFactory(properties);
-            Connection con = fabrica.conectar();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM livros ORDER BY nota DESC";
-            ResultSet rs = st.executeQuery(sql);
-            
-            DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
-            tblModel.setRowCount(0);
-            
-            while (rs.next()) {
-                String id = String.valueOf(rs.getInt("id_livro"));
-                String titulo = rs.getString("titulo");
-                String autor = rs.getString("autor");
-                String genero = rs.getString("genero");
-                String nota = String.valueOf(rs.getDouble("nota"));
-                
-                String tbData[] = {id, titulo, autor, genero, nota};                           
-                tblModel.addRow(tbData);
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-    }//GEN-LAST:event_exibirTodosButtonActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
         if (usuario.getAdm() == 1) {
@@ -193,6 +191,30 @@ public class LivrosTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarLivroButtonActionPerformed
 
+    private void avaliarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avaliarButtonActionPerformed
+        int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            try {
+                Object livroSelecionado = jTable1.getValueAt(row, 1);
+                Livro livro = new Livro(String.valueOf(livroSelecionado));
+                LivroDAO livroDAO = new LivroDAO(properties);
+                livro = livroDAO.buscar(livro);
+                
+                double n = Double.parseDouble(JOptionPane.showInputDialog("Que nota você deseja dar a esse livro?"));
+                Nota nota = new Nota(livro.getId(), usuario.getId(), n);
+                NotaDAO notaDAO = new NotaDAO(properties);
+                notaDAO.cadastrar(nota);
+                notaDAO.atualizar(livro.getId());
+       
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um livro");
+        }
+       
+    }//GEN-LAST:event_avaliarButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,8 +251,8 @@ public class LivrosTela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton avaliarButton;
     private javax.swing.JButton buscarLivroButton;
-    private javax.swing.JButton exibirTodosButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField livroTextField;
